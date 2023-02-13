@@ -54,19 +54,29 @@
 			<div class="container">
 				<div class="input-group input-group-lg my-5">
 					<input
-						v-model="newTask"
+						v-model="newTask.todo"
 						type="text"
 						class="form-control"
 						placeholder="New task"
 						aria-label="New task"
 						aria-describedby="button-addon2"
 					/>
+					<select
+						class="form-select"
+						aria-label="Default select example"
+						width="10"
+					>
+						<option selected>Seleziona una opzione</option>
+						<option value="1">COMPLETATO</option>
+						<option value="2">DA COMPLETARE</option>
+					</select>
 					<button
-						class="btn btn-outline-secondary"
+						@click="addTask()"
+						class="btn btn-outline-primary"
 						type="button"
 						id="button-addon2"
 					>
-						Button
+						Inserisci
 					</button>
 				</div>
 				<h1>Lista</h1>
@@ -75,10 +85,19 @@
 						v-for="(task, index) in tasks"
 						class="list-group-item d-flex align-items-center"
 					>
-						{{ task }}
+						&#8291; {{ task.todo }}
+						<span
+							v-if="task.done"
+							class="badge rounded-pill bg-success ms-auto mx-2"
+						>
+							COMPLETATO
+						</span>
+						<span v-else class="badge rounded-pill bg-danger ms-auto mx-2">
+							DA COMPLETARE
+						</span>
 						<span
 							@click="removeTask(index)"
-							class="badge bg-danger rounded-pill ms-auto"
+							class="badge bg-primary rounded-pill"
 						>
 							<i class="fa-solid fa-xmark"></i>
 						</span>

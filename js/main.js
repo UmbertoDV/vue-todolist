@@ -3,13 +3,29 @@ const { createApp } = Vue;
 createApp({
 	data() {
 		return {
-			tasks: ["Butta la pasta", "Fai la tavola", "Magna el tutto"],
-			newTask: "",
+			tasks: [
+				{
+					todo: "Butta la pasta",
+					done: false,
+				},
+				{
+					todo: "Aspetta 10 minuti",
+					done: true,
+				},
+			],
+			newTask: { todo: "", done: false },
 		};
 	},
 
 	methods: {
-		addTask() {},
+		addTask() {
+			// console.log(this.newTask);
+			const newTask = {
+				todo: this.newTask.title,
+				done: false,
+			};
+			this.tasks.push(this.newTask);
+		},
 
 		removeTask(i) {
 			this.tasks.splice(i, 1);
