@@ -52,6 +52,9 @@
 				</div>
 			</nav>
 			<div class="container">
+				<div v-if="error" class="alert alert-danger mt-5" role="alert">
+					Devi inserire se hai completato la task o no!
+				</div>
 				<div class="input-group input-group-lg my-5">
 					<input
 						v-model="newTask.todo"
@@ -64,11 +67,11 @@
 					<select
 						class="form-select"
 						aria-label="Default select example"
-						width="10"
+						v-model="selected"
 					>
-						<option selected>Seleziona una opzione</option>
-						<option value="1">COMPLETATO</option>
-						<option value="2">DA COMPLETARE</option>
+						<option v-for="option in options" :value="option.value">
+							{{ option.text }}
+						</option>
 					</select>
 					<button
 						@click="addTask()"

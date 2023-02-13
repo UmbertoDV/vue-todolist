@@ -13,18 +13,36 @@ createApp({
 					done: true,
 				},
 			],
-			newTask: { todo: "", done: false },
+			newTask: { todo: "", done: "" },
+			selected: "A",
+			options: [
+				{ text: "Seleziona", value: "A" },
+				{ text: "COMPLETATO", value: "B" },
+				{ text: "DA COMPLETARE", value: "C" },
+			],
+			error: false,
 		};
 	},
 
 	methods: {
 		addTask() {
-			// console.log(this.newTask);
+			let boolTask = true;
+
+			if (this.options.value == "B") {
+				boolTask = true;
+			} else if (this.options.value == "A") {
+				this.error = true;
+			} else {
+				boolTask = false;
+			}
+
 			const newTask = {
-				todo: this.newTask.title,
-				done: false,
+				todo: this.newTask.todo,
+				done: boolTask,
 			};
-			this.tasks.push(this.newTask);
+
+			console.log(newTask);
+			this.tasks.push(newTask);
 		},
 
 		removeTask(i) {
