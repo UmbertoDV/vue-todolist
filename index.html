@@ -57,6 +57,7 @@
 				</div>
 				<div class="input-group input-group-lg my-5">
 					<input
+						@keyUp.enter="addTask()"
 						v-model="newTask.todo"
 						type="text"
 						class="form-control"
@@ -87,20 +88,26 @@
 					<li
 						v-for="(task, index) in tasks"
 						class="list-group-item d-flex align-items-center"
+						:class="(task.done) ? 'text-decoration-line-through' : ''"
 					>
 						&#8291; {{ task.todo }}
 						<span
 							v-if="task.done"
-							class="badge rounded-pill bg-success ms-auto mx-2"
+							@click="doneTodo(task)"
+							class="badge rounded-pill bg-success ms-auto mx-2 xmark"
 						>
 							COMPLETATO
 						</span>
-						<span v-else class="badge rounded-pill bg-danger ms-auto mx-2">
+						<span
+							v-else
+							@click="doneTodo(task)"
+							class="badge rounded-pill bg-danger ms-auto mx-2 xmark"
+						>
 							DA COMPLETARE
 						</span>
 						<span
 							@click="removeTask(index)"
-							class="badge bg-primary rounded-pill"
+							class="badge bg-primary rounded-pill xmark"
 						>
 							<i class="fa-solid fa-xmark"></i>
 						</span>

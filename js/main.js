@@ -26,27 +26,39 @@ createApp({
 
 	methods: {
 		addTask() {
-			let boolTask = true;
-
-			if (this.options.value == "B") {
+			if (this.selected == "B") {
+				let boolTask = true;
 				boolTask = true;
-			} else if (this.options.value == "A") {
+
+				let newTask = {
+					todo: this.newTask.todo,
+					done: boolTask,
+				};
+
+				this.error = false;
+				this.tasks.push(newTask);
+			} else if (this.selected == "A") {
 				this.error = true;
-			} else {
+			} else if (this.selected == "C") {
+				let boolTask = true;
 				boolTask = false;
+
+				let newTask = {
+					todo: this.newTask.todo,
+					done: boolTask,
+				};
+
+				this.error = false;
+				this.tasks.push(newTask);
 			}
-
-			const newTask = {
-				todo: this.newTask.todo,
-				done: boolTask,
-			};
-
-			console.log(newTask);
-			this.tasks.push(newTask);
 		},
 
 		removeTask(i) {
 			this.tasks.splice(i, 1);
+		},
+
+		doneTodo(task) {
+			task.done = !task.done;
 		},
 	},
 }).mount("#app");
